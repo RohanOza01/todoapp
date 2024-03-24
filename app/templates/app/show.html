@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Show Data - To Do List</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>To Do List</h2>
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Sr No.</th>
+                    <th>To Do</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if Key %}
+                {% for note in Key %}
+                <tr>
+                    <td>{{ note.id }}</td>
+                    <td>{{ note.Notes }}</td>
+                    <td>
+                        <form action="{% url 'update_page' pk=note.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{% url 'Delete_Data' pk=note.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="4">No data available</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+</head>
+
+<body>
+    {% if update %}
+    <form action="{% url 'update_data' pk=update.pk %}" method="post">
+        {% csrf_token %}
+        <h2>To Do List</h2>
+        <input type="text" name="List" id="To_Do" value="{{ update.Notes }}">
+        <input type="submit" value="submit">
+    </form>
+    {% endif %}
+</body>
+
+</html>
